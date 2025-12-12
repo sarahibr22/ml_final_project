@@ -1,0 +1,17 @@
+services:
+  qwen-embed:
+    image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.8
+    ports:
+      - "9977:80"
+    command:
+      [
+        "--model-id","Qwen/Qwen3-Embedding-0.6B",
+      ]
+    environment:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMEXPR_NUM_THREADS: "1"
+      KMP_BLOCKTIME: "0"
+      RUST_LOG: "error"
+    restart: unless-stopped
